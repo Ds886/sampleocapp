@@ -24,10 +24,10 @@ spec:
               value: "pgsql-postgresql"
             - name: "PGUSER"
               value: "postgres"
-            - name: PG_PASSWORD
+            - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
+                  name: pgsql-postgresql
                   key: postgres-password
           ports:
             - name: http
