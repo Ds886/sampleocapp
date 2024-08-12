@@ -1,0 +1,6 @@
+# Commands
+
+## Run local container build 
+
+## deploy a dev build
+npx nodeshift --deploy.port 8080 --expose
