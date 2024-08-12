@@ -15,5 +15,7 @@ eval_args(){
 
 docker image rm "${IMAGE_FULL}"
 docker build -f images/Dockerfile -t "${IMAGE_FULL}" .
+EC_BUILD="$?"
+[ "$EC_BUILD" != 0 ] && echo "Build has failed check the logs" && exit 1
 [ -n "${1}" ] && eval_args "${1}"
 
