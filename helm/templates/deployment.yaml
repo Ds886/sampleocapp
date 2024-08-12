@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "hello-world.fullname" . }}
+  name: {{ include "ws.fullname" . }}
   labels:
-    {{- include "hello-world.labels" . | nindent 4 }}
+    {{- include "ws.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "hello-world.selectorLabels" . | nindent 6 }}
+      {{- include "ws.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "hello-world.selectorLabels" . | nindent 8 }}
+        {{- include "ws.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ include "hello-world.serviceAccountName" . }}
+      serviceAccountName: {{ include "ws.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -30,4 +30,4 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: 8080

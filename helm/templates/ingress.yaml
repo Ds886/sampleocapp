@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ws.fullname" . }}
+  labels:
+    {{- include "ws.labels" . | nindent 4 }}
+spec:
+  rules:
+  - host: hello-openshift.yourcluster.example.com
+    http:
+      paths:
+      - backend:
+          # Forward to a Service called 'hello-openshift'
+          service:
+            name: hello-openshift
+            port:
+              number: 8080
+        path: /
+        pathType: Exact
+
+
