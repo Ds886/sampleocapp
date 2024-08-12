@@ -40,6 +40,3 @@ kubectl port-forward pgsql-postgresql-0 5432:5432
 ./build-prod.sh run
   
 ```
-
-## deploy a dev build to openshift using nodeshift(deprecated)
-npx nodeshift --deploy.port 8080 --expose
