@@ -19,6 +19,16 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: "PGHOST"
+              value: "pgsql-postgresql"
+            - name: "PGUSER"
+              value: "postgres"
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-password
           ports:
             - name: http
               containerPort: 8080
